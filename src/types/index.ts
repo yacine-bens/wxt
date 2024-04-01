@@ -896,6 +896,11 @@ export interface WxtBuilder {
    * Start a dev server at the provided port.
    */
   createServer(info: ServerInfo): Promise<WxtBuilderServer>;
+
+  /**
+   * Get runtime used to import non-JS files.
+   */
+  createRuntime(): Promise<WxtBuilderRuntime>;
 }
 
 export interface WxtBuilderServer {
@@ -951,6 +956,11 @@ export interface ServerInfo {
    * Ex: `"http://localhost:3000"`
    */
   origin: string;
+}
+
+export interface WxtBuilderRuntime {
+  importFile<T>(path: string): Promise<T>;
+  close(): Promise<void>;
 }
 
 export type HookResult = Promise<void> | void;
